@@ -11,8 +11,8 @@ custom_fields:
   {
     base_url: "https://de.sentry.io",
     api_key: "",
-    organization: "theodo-v0",
-    projects: "4510108489678928",
+    organization: "",
+    projects: "",
     period: "24h",
   }
 
