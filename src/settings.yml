@@ -1,0 +1,53 @@
+#
+# Changes to this file will be overwritten by `trmnlp pull`.
+#
+# Docs: https://help.usetrmnl.com/en/articles/10542599-importing-and-exporting-private-plugins#h_581fb988f0
+#
+---
+strategy: polling
+no_screen_padding: "no"
+dark_mode: "no"
+static_data: ""
+polling_verb: POST
+polling_url: "https://trmnl-sentry.kraynel-perso.workers.dev/data"
+polling_headers: ""
+polling_body: "base_url={{base_url}}&api_key={{api_key}}&organization={{organization}}&projects={{projects}}&period={{period}}"
+name: Sentry
+refresh_interval: 1440
+
+# custom plugin form fields (optional, see docs):
+custom_fields:
+  - keyname: base_url
+    name: Region
+    field_type: string
+    default: https://us.sentry.io
+    help_text: Please include https://. https://de.sentry.io for EU.
+  - keyname: api_key
+    field_type: string
+    name: API key
+    help_text: You can create an API key in Sentry under Settings > Developer Settings > Auth Tokens.
+  - keyname: organization
+    name: Sentry organization slug
+    default: sandbox
+    field_type: string
+  # - keyname: organization
+  #   name: Sentry organization
+  #   field_type: xhrSelect
+  #   endpoint: https://trmnl-sentry.kraynel-perso.workers.dev/orgs
+  - keyname: projects
+    name: Sentry projects
+    field_type: xhrSelect
+    multiple: true
+    endpoint: https://trmnl-sentry.kraynel-perso.workers.dev/projects
+    help_text: Use <kdb>⌘</kdb>+<kdb>click</kdb> or <kdb>ctrl</kdb>+<kdb>click</kdb> to select and deselect multiple options.
+  - keyname: period
+    name: Time period
+    field_type: select
+    options:
+      - "24h"
+      - "7d"
+      - "30d"
+      - "90d"
+      - "6m"
+      - "1y"
+    default: "24h"
