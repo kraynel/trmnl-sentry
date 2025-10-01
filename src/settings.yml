@@ -44,10 +44,10 @@ custom_fields:
     name: Time period
     field_type: select
     options:
+      - "1h"
       - "24h"
       - "7d"
+      - "14d"
       - "30d"
       - "90d"
-      - "6m"
-      - "1y"
     default: "24h"

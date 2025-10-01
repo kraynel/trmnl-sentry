@@ -10,7 +10,7 @@ watch:
 custom_fields:
   {
     base_url: "https://de.sentry.io",
-    api_key: "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",
+    api_key: "",
     organization: "theodo-v0",
     projects: "4510108489678928",
     period: "24h",
