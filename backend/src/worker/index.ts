@@ -128,6 +128,11 @@ app.post("/data", zValidator("form", schema), async (c) => {
     }/events/?dataset=metricsEnhanced&field=apdex%28300%29&field=user_misery%28300%29&name=&onDemandType=dynamic_query&per_page=20&query=&statsPeriod=${
       pluginData.period
     }&useOnDemandMetrics=false&yAxis=user_misery%28300%29`,
+    transactions: `${baseDomain}/api/0/organizations/${
+      pluginData.organization
+    }/events/?dataset=metricsEnhanced&field=transaction&field=count%28%29&name=&onDemandType=dynamic_query&per_page=20&query=&statsPeriod=${
+      pluginData.period
+    }&useOnDemandMetrics=false&yAxis=user_misery%28300%29`,
     organizations: `${baseDomain}/api/0/organizations/`
   };
 

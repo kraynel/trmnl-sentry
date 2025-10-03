@@ -1,1 +1,21 @@
-half horizontal!
+<!-- import Highcharts + Chartkick libraries -->
+<script src="https://usetrmnl.com/js/highcharts/12.3.0/highcharts.js"></script>
+<script src="https://usetrmnl.com/js/chartkick/5.0.1/chartkick.min.js"></script>
+
+<!-- markup with empty, ID'd element for chart injection -->
+<div class="view view--full">
+  <div class="layout layout--row gap--space-between">
+    <div class="grid grid--cols-2">
+      {% render "apdex", IDX_2: IDX_2 %}
+      {% render "misery", IDX_2: IDX_2 %}
+      {% render "errors", IDX_0: IDX_0 %}
+      {% render "issues", IDX_0: IDX_0 %}
+    </div>
+
+    <div id="chart-123" style="width: 100%"></div>
+  </div>
+
+  {% render "title_bar", IDX_4: IDX_4, trmnl: trmnl %}
+</div>
+
+{% render "error_chart", height: 180, IDX_1: IDX_1 %}

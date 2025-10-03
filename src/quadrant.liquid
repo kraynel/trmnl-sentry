@@ -1,1 +1,13 @@
-quadrant!
+<div class="view" class="w--full">
+  <div class="layout layout--row gap--space-between">
+    <div class="grid grid--cols-2">
+      {% render "apdex", IDX_2: IDX_2 %}
+      {% render "misery", IDX_2: IDX_2 %}
+      {% render "errors", IDX_0: IDX_0 %}
+      {% render "issues", IDX_0: IDX_0 %}
+    </div>
+
+  </div>
+  {% render "title_bar", IDX_4: IDX_4, trmnl: trmnl %}
+
+</div>
