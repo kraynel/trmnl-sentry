@@ -9,7 +9,7 @@ no_screen_padding: "no"
 dark_mode: "no"
 static_data: ""
 polling_verb: POST
-polling_url: "{{base_url}}/api/0/organizations/{{organization}}/events/?dataset=errors&field=count_unique%28issue%29&field=count%28%29&name=&per_page=20&query=&sort=count%28%29&statsPeriod={{period}}&yAxis=count%28%29\r\n{{base_url}}/api/0/organizations/{{organization}}//events-stats/?dataset=errors&statsPeriod={{period}}\r\n{{base_url}}/api/0/organizations/{{organization}}/events/?dataset=metricsEnhanced&field=apdex%28300%29&field=user_misery%28300%29&name=&onDemandType=dynamic_query&per_page=20&query=&statsPeriod={{period}}&useOnDemandMetrics=false\r\n{{base_url}}/api/0/organizations/{{organization}}/events/?dataset=metricsEnhanced&field=transaction&field=count%28%29&name=&onDemandType=dynamic_query&per_page=20&query=&sort=-count%28%29&statsPeriod={{period}}&useOnDemandMetrics=false\r\n{{base_url}}/api/0/organizations/"
+polling_url: "{{base_url}}/api/0/organizations/{{organization}}/events/?dataset=errors&field=count_unique%28issue%29&field=count%28%29&name=&per_page=20&query=&sort=count%28%29&statsPeriod={{period}}&yAxis=count%28%29{% unless projects == \"\" %}&project={% endunless %}{{ projects | split: \",\" | join: \"&project=\" }}\r\n{{base_url}}/api/0/organizations/{{organization}}//events-stats/?dataset=errors&statsPeriod={{period}}{% unless projects == \"\" %}&project={% endunless %}{{ projects | split: \",\" | join: \"&project=\" }}\r\n{{base_url}}/api/0/organizations/{{organization}}/events/?dataset=metricsEnhanced&field=apdex%28300%29&field=user_misery%28300%29&name=&onDemandType=dynamic_query&per_page=20&query=&statsPeriod={{period}}&useOnDemandMetrics=false{% unless projects == \"\" %}&project={% endunless %}{{ projects | split: \",\" | join: \"&project=\" }}\r\n{{base_url}}/api/0/organizations/{{organization}}/events/?dataset=metricsEnhanced&field=transaction&field=count%28%29&name=&onDemandType=dynamic_query&per_page=20&query=&sort=-count%28%29&statsPeriod={{period}}&useOnDemandMetrics=false{% unless projects == \"\" %}&project={% endunless %}{{ projects | split: \",\" | join: \"&project=\" }}\r\n"
 polling_headers: authorization=Bearer {{api_key}}
 polling_body:
 name: Sentry
@@ -30,16 +30,11 @@ custom_fields:
     name: Sentry organization slug
     default: sandbox
     field_type: string
-  # - keyname: organization
-  #   name: Sentry organization
-  #   field_type: xhrSelect
-  #   endpoint: https://trmnl-sentry.kraynel-perso.workers.dev/orgs
-  # - keyname: projects
-  #   name: Sentry projects
-  #   field_type: xhrSelect
-  #   multiple: true
-  #   endpoint: https://trmnl-sentry.kraynel-perso.workers.dev/projects
-  #   help_text: Use <kdb>⌘</kdb>+<kdb>click</kdb> or <kdb>ctrl</kdb>+<kdb>click</kdb> to select and deselect multiple options.
+  - keyname: projects
+    name: Sentry project IDs
+    field_type: multi_string
+    help_text: Check your project IDs under Settings > Projects. Leave empty for all projects
+    optional: true
   - keyname: period
     name: Time period
     field_type: select
