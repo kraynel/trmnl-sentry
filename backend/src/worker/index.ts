@@ -117,23 +117,18 @@ app.post("/data", zValidator("form", schema), async (c) => {
   const period = pluginData.period as keyof typeof intervals;
 
   const urls = {
-    errors_count: `${baseDomain}/api/0/organizations/${pluginData.organization}/events/?dataset=errors&field=count%28%29&name=&per_page=20&project=${pluginData.projects}&query=&sort=count%28%29&statsPeriod=${pluginData.period}&yAxis=count%28%29`,
-    unique_issues: `${baseDomain}/api/0/organizations/${pluginData.organization}/events/?dataset=errors&field=count_unique%28issue%29&name=&per_page=20&project=${pluginData.projects}&query=&sort=count_unique%28issue%29&statsPeriod=${pluginData.period}&yAxis=count_unique%28issue%29`,
+    errors: `${baseDomain}/api/0/organizations/${pluginData.organization}/events/?dataset=errors&field=count_unique%28issue%29&field=count%28%29&name=&per_page=20&query=&sort=count%28%29&statsPeriod=${pluginData.period}&yAxis=count%28%29`,
     events: `${baseDomain}/api/0/organizations/${
       pluginData.organization
-    }/events-stats/?dataset=errors&interval=${intervals[period] ?? '1h'}&orderby=count%28%29&partial=1&project=${pluginData.projects}&query=error.handled%3Atrue&statsPeriod=${
+    }/events-stats/?dataset=errors&interval=${intervals[period] ?? '1h'}&statsPeriod=${
       period
-    }&yAxis=count%28%29`,
-    user_misery: `${baseDomain}/api/0/organizations/${
+    }`,
+    user_misery_apdex: `${baseDomain}/api/0/organizations/${
       pluginData.organization
-    }/events/?dataset=metricsEnhanced&field=user_misery%28300%29&name=&onDemandType=dynamic_query&per_page=20&project=${pluginData.projects}&query=&statsPeriod=${
+    }/events/?dataset=metricsEnhanced&field=apdex%28300%29&field=user_misery%28300%29&name=&onDemandType=dynamic_query&per_page=20&query=&statsPeriod=${
       pluginData.period
     }&useOnDemandMetrics=false&yAxis=user_misery%28300%29`,
-    apdex: `${baseDomain}/api/0/organizations/${
-      pluginData.organization
-    }/events/?dataset=metricsEnhanced&field=apdex%28300%29&name=&onDemandType=dynamic_query&per_page=20&project=${pluginData.projects}&query=&statsPeriod=${
-      pluginData.period
-    }&useOnDemandMetrics=false&yAxis=apdex%28300%29`,
+    organizations: `${baseDomain}/api/0/organizations/`
   };
 
   const results = await Promise.all(
